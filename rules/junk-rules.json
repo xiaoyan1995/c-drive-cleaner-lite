@@ -1,0 +1,1852 @@
+{
+  "version": "1.2.0",
+  "updatedAt": "2026-05-10",
+  "rules": [
+    {
+      "id": "windows-temp-user",
+      "name": "临时文件",
+      "category": "system_cache",
+      "paths": [
+        "%TEMP%"
+      ],
+      "safeLevel": "safe",
+      "description": "用户会话临时文件，可安全清理，正在使用中的文件会自动跳过。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-temp-system",
+      "name": "临时文件",
+      "category": "system_cache",
+      "paths": [
+        "%SystemRoot%\\Temp"
+      ],
+      "safeLevel": "safe",
+      "description": "系统临时缓存，通常可安全删除。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-service-temp",
+      "name": "临时文件",
+      "category": "system_cache",
+      "paths": [
+        "%SystemRoot%\\ServiceProfiles\\*\\AppData\\Local\\Temp"
+      ],
+      "safeLevel": "safe",
+      "description": "系统服务临时文件，删除后按需重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-update-cache",
+      "name": "系统更新缓存",
+      "category": "update_residual",
+      "paths": [
+        "%SystemRoot%\\SoftwareDistribution\\Download"
+      ],
+      "safeLevel": "safe",
+      "description": "Windows 更新下载残留，删除后更新时会重新下载。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "delivery-optimization-cache",
+      "name": "系统更新缓存",
+      "category": "update_residual",
+      "paths": [
+        "%ProgramData%\\Microsoft\\Windows\\DeliveryOptimization\\Cache"
+      ],
+      "safeLevel": "safe",
+      "description": "系统更新分发缓存，删除不会影响系统稳定性。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-thumbnail-cache",
+      "name": "缩略图缓存",
+      "category": "system_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Windows\\Explorer"
+      ],
+      "pattern": "thumbcache_*",
+      "safeLevel": "safe",
+      "description": "资源管理器缩略图缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-old",
+      "name": "旧版系统文件",
+      "category": "update_residual",
+      "paths": [
+        "%SystemDrive%\\Windows.old"
+      ],
+      "safeLevel": "caution",
+      "description": "旧系统回滚目录，删除后将无法回滚到旧版本。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "wer-reports",
+      "name": "其它文件",
+      "category": "system_cache",
+      "paths": [
+        "%ProgramData%\\Microsoft\\Windows\\WER\\ReportArchive",
+        "%ProgramData%\\Microsoft\\Windows\\WER"
+      ],
+      "safeLevel": "safe",
+      "description": "错误报告缓存文件，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "chrome-cache",
+      "name": "Chrome 浏览器缓存",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\*\\Cache",
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\*\\Service Worker",
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\*\\DawnGraphiteCache",
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\*\\DawnWebGPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "网页缓存文件，删除后首次打开网页可能稍慢。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "chrome-code-cache",
+      "name": "Chrome Code Cache",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\*\\Code Cache"
+      ],
+      "safeLevel": "safe",
+      "description": "脚本编译缓存，删除后会自动生成。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "chrome-gpu-cache",
+      "name": "Chrome GPUCache",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\*\\GPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "GPU 渲染缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "chrome-logs",
+      "name": "Chrome 日志文件",
+      "category": "logs",
+      "paths": [
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\*.log",
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\*\\*.log",
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Crashpad\\reports",
+        "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\BrowserMetrics"
+      ],
+      "safeLevel": "safe",
+      "description": "Chrome 浏览器运行日志和崩溃报告，删除不影响正常使用。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "chrome-update",
+      "name": "Chrome 更新文件",
+      "category": "update_residual",
+      "paths": [
+        "%LOCALAPPDATA%\\Google\\Update\\Download",
+        "%LOCALAPPDATA%\\Google\\Update\\Install"
+      ],
+      "safeLevel": "caution",
+      "description": "Chrome 自动更新下载的安装包，更新完成后可安全删除。",
+      "detectPath": "%LOCALAPPDATA%\\Google\\Chrome\\Application",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "edge-cache",
+      "name": "Edge 浏览器缓存",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\*\\Cache",
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\*\\Service Worker",
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\*\\DawnGraphiteCache",
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\*\\DawnWebGPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "网页缓存文件，删除后浏览器会按需重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "edge-code-cache",
+      "name": "Edge Code Cache",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\*\\Code Cache"
+      ],
+      "safeLevel": "safe",
+      "description": "脚本缓存，删除后会自动生成。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "edge-gpu-cache",
+      "name": "Edge GPUCache",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\*\\GPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "GPU 渲染缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "edge-logs",
+      "name": "Edge 日志文件",
+      "category": "logs",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\*.log",
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\*\\*.log",
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\Crashpad\\reports",
+        "%LOCALAPPDATA%\\Microsoft\\Edge\\User Data\\BrowserMetrics"
+      ],
+      "safeLevel": "safe",
+      "description": "Edge 浏览器运行日志和崩溃报告，删除不影响正常使用。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "edge-update",
+      "name": "Edge 更新文件",
+      "category": "update_residual",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\EdgeUpdate\\Download",
+        "%LOCALAPPDATA%\\Microsoft\\EdgeUpdate\\Install",
+        "%LOCALAPPDATA%\\Microsoft\\EdgeWebView\\Application\\*\\Installer\\*.exe"
+      ],
+      "safeLevel": "caution",
+      "description": "Edge 自动更新下载的安装包和临时文件，更新完成后可安全删除。",
+      "detectPath": "%LOCALAPPDATA%\\Microsoft\\Edge\\Application",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "firefox-cache",
+      "name": "Firefox 浏览器缓存",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Mozilla\\Firefox\\Profiles\\*\\cache2"
+      ],
+      "safeLevel": "safe",
+      "description": "网页缓存文件，删除后按需重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "brave-cache",
+      "name": "Brave 浏览器缓存",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\BraveSoftware\\Brave-Browser\\User Data\\*\\Cache"
+      ],
+      "safeLevel": "safe",
+      "description": "Brave 网页缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "brave-code-cache",
+      "name": "Brave Code Cache",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\BraveSoftware\\Brave-Browser\\User Data\\*\\Code Cache"
+      ],
+      "safeLevel": "safe",
+      "description": "Brave 脚本缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "brave-gpu-cache",
+      "name": "Brave GPUCache",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\BraveSoftware\\Brave-Browser\\User Data\\*\\GPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "Brave GPU 缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "chromium-cache",
+      "name": "Chromium 浏览器缓存",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Chromium\\User Data\\*\\Cache"
+      ],
+      "safeLevel": "safe",
+      "description": "Chromium 网页缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "chromium-code-cache",
+      "name": "Chromium Code Cache",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Chromium\\User Data\\*\\Code Cache"
+      ],
+      "safeLevel": "safe",
+      "description": "Chromium 脚本缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "chromium-gpu-cache",
+      "name": "Chromium GPUCache",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Chromium\\User Data\\*\\GPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "Chromium GPU 缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-prefetch",
+      "name": "系统诊断数据",
+      "category": "system_cache",
+      "paths": [
+        "%SystemRoot%\\Prefetch"
+      ],
+      "description": "预读取缓存，清理后启动阶段会短暂重新学习。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "directx-shader-cache",
+      "name": "DirectX Shader 缓存",
+      "category": "system_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\D3DSCache"
+      ],
+      "safeLevel": "safe",
+      "description": "DirectX 着色器编译缓存，删除后游戏/应用首次运行时会自动重新生成，稍有卡顿属正常现象。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "nvidia-downloader-cache",
+      "name": "NVIDIA 下载缓存",
+      "category": "app_cache",
+      "paths": [
+        "%ProgramData%\\NVIDIA Corporation\\Downloader"
+      ],
+      "safeLevel": "safe",
+      "description": "显卡驱动下载缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "onedrive-logs",
+      "name": "OneDrive 日志缓存",
+      "category": "logs",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\OneDrive\\logs"
+      ],
+      "safeLevel": "safe",
+      "description": "OneDrive 日志缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-localapp-cache",
+      "name": "通用应用 Cache 目录",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\*\\Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "自动识别本机安装软件的常见 Cache 目录，覆盖更多第三方应用。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-localapp-caches",
+      "name": "通用应用 Caches 目录",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\*\\Caches"
+      ],
+      "safeLevel": "caution",
+      "description": "自动识别本机安装软件的 Caches 目录，清理后应用会按需重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-localapp-code-cache",
+      "name": "通用应用 Code Cache",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\*\\Code Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "脚本编译缓存，通常可直接清理，覆盖更多基于 Chromium/Electron 的软件。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-localapp-gpu-cache",
+      "name": "通用应用 GPUCache",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\*\\GPUCache"
+      ],
+      "safeLevel": "caution",
+      "description": "GPU 渲染缓存，覆盖更多应用。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-roaming-cache",
+      "name": "Roaming Cache 目录",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\*\\Cache",
+        "%APPDATA%\\*\\Caches"
+      ],
+      "safeLevel": "caution",
+      "description": "Roaming 下的缓存目录，帮助识别更多软件缓存。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "uwp-localcache",
+      "name": "UWP LocalCache",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Packages\\*\\LocalCache"
+      ],
+      "safeLevel": "caution",
+      "description": "Windows 商店应用的 LocalCache 目录。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "wechat-file-storage",
+      "name": "微信 聊天图片",
+      "category": "app_cache",
+      "paths": [
+        "%USERPROFILE%\\Documents\\WeChat Files\\*\\FileStorage"
+      ],
+      "safeLevel": "caution",
+      "description": "微信媒体缓存，清理后部分历史媒体需要重新下载。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "qq-cache",
+      "name": "QQ 缓存文件",
+      "category": "app_cache",
+      "paths": [
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "QQ 图片与临时缓存，删除后会重新生成。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "wxwork-cache",
+      "name": "企业微信缓存",
+      "category": "app_cache",
+      "paths": [
+        "%USERPROFILE%\\Documents\\WXWork\\*\\Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "企业微信缓存，清理后可恢复使用。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "steam-htmlcache",
+      "name": "Steam HTML/Shader 缓存",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Steam\\htmlcache\\Cache",
+        "%LOCALAPPDATA%\\Steam\\htmlcache\\Code Cache",
+        "%LOCALAPPDATA%\\Steam\\htmlcache\\GPUCache",
+        "%LOCALAPPDATA%\\Steam\\htmlcache\\GrShaderCache",
+        "%LOCALAPPDATA%\\Steam\\htmlcache\\ShaderCache",
+        "%LOCALAPPDATA%\\Steam\\htmlcache\\GraphiteDawnCache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\Steam",
+      "safeLevel": "safe",
+      "description": "Steam 客户端内嵌浏览器和着色器缓存，可安全清理。来源：WPS清理大师规则。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "steam-downloading",
+      "name": "Steam 下载缓存",
+      "category": "app_cache",
+      "paths": [
+        "C:\\Program Files (x86)\\Steam\\steamapps\\downloading"
+      ],
+      "safeLevel": "caution",
+      "description": "Steam 未完成下载缓存，清理会丢失断点续传进度。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "steam-shader-cache",
+      "name": "Steam Shader 缓存",
+      "category": "app_cache",
+      "paths": [
+        "C:\\Program Files (x86)\\Steam\\steamapps\\shadercache"
+      ],
+      "safeLevel": "safe",
+      "description": "游戏着色器缓存，删除后会重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "epic-web-cache",
+      "name": "Epic Web Cache",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\EpicGamesLauncher\\Saved\\webcache*"
+      ],
+      "safeLevel": "safe",
+      "description": "Epic 启动器网页缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "vscode-cache-data",
+      "name": "VS Code CachedData",
+      "category": "dev_cache",
+      "paths": [
+        "%APPDATA%\\Code\\CachedData"
+      ],
+      "safeLevel": "caution",
+      "description": "VS Code 编译扩展缓存，删除后重建但首次启动较慢。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "vscode-gpu-cache",
+      "name": "VS Code GPUCache",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Code\\GPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "VS Code 渲染缓存，删除后重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "jetbrains-caches",
+      "name": "JetBrains 缓存",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\JetBrains\\*\\caches"
+      ],
+      "safeLevel": "caution",
+      "description": "IDE 索引缓存，删除后首次打开项目会重新索引。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "jetbrains-logs",
+      "name": "JetBrains 日志",
+      "category": "logs",
+      "paths": [
+        "%LOCALAPPDATA%\\JetBrains\\*\\log"
+      ],
+      "safeLevel": "safe",
+      "description": "JetBrains 日志文件，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "npm-cache",
+      "name": "npm 缓存",
+      "category": "dev_cache",
+      "paths": [
+        "%APPDATA%\\npm-cache",
+        "%LOCALAPPDATA%\\npm-cache"
+      ],
+      "safeLevel": "caution",
+      "description": "依赖下载缓存，删除后安装依赖时会重新下载。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "yarn-cache",
+      "name": "Yarn 缓存",
+      "category": "dev_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Yarn\\Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "Yarn 下载缓存，删除后可自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "pnpm-store",
+      "name": "pnpm Store",
+      "category": "dev_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\pnpm\\store",
+        "%USERPROFILE%\\.pnpm-store"
+      ],
+      "safeLevel": "caution",
+      "description": "pnpm 包缓存，清理后会重新下载依赖。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "pip-cache",
+      "name": "pip 缓存",
+      "category": "dev_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\pip\\Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "Python 包下载缓存，删除后需重新联网下载，离线环境请勿清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "nuget-packages",
+      "name": "NuGet 包缓存",
+      "category": "dev_cache",
+      "paths": [
+        "%USERPROFILE%\\.nuget\\packages"
+      ],
+      "safeLevel": "caution",
+      "description": "NuGet 本地缓存包，删除后会在构建时重新下载。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "gradle-caches",
+      "name": "Gradle 缓存",
+      "category": "dev_cache",
+      "paths": [
+        "%USERPROFILE%\\.gradle\\caches"
+      ],
+      "safeLevel": "caution",
+      "description": "Gradle 缓存，清理后会重新拉取构建依赖。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "maven-repository",
+      "name": "Maven 本地仓库",
+      "category": "dev_cache",
+      "paths": [
+        "%USERPROFILE%\\.m2\\repository"
+      ],
+      "safeLevel": "caution",
+      "description": "Maven 本地依赖仓库，清理后将重新下载依赖。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "cargo-registry-cache",
+      "name": "Cargo Registry 缓存",
+      "category": "dev_cache",
+      "paths": [
+        "%USERPROFILE%\\.cargo\\registry\\cache"
+      ],
+      "safeLevel": "caution",
+      "description": "Rust 包缓存，删除后构建会重新下载。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "local-crash-dumps",
+      "name": "其它文件",
+      "category": "temp_files",
+      "paths": [
+        "%LOCALAPPDATA%\\CrashDumps"
+      ],
+      "pattern": "*.dmp",
+      "safeLevel": "safe",
+      "description": "程序崩溃转储文件，通常可安全删除。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "local-temp-tmp-files",
+      "name": "临时文件",
+      "category": "temp_files",
+      "paths": [
+        "%LOCALAPPDATA%\\Temp"
+      ],
+      "pattern": "*.tmp",
+      "safeLevel": "safe",
+      "description": "临时文件，删除后通常不影响使用。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "local-temp-log-files",
+      "name": "日志文件",
+      "category": "temp_files",
+      "paths": [
+        "%LOCALAPPDATA%\\Temp"
+      ],
+      "pattern": "*.log",
+      "safeLevel": "safe",
+      "description": "临时日志文件，可安全删除。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "dotnet-assembly-temp",
+      "name": ".Net框架",
+      "category": "system_cache",
+      "paths": [
+        "%SystemRoot%\\assembly\\NativeImages_v4.0.30319_64",
+        "%SystemRoot%\\assembly\\NativeImages_v4.0.30319_32",
+        "%SystemRoot%\\assembly\\NativeImages_v2.0.50727_64",
+        "%SystemRoot%\\assembly\\NativeImages_v2.0.50727_32",
+        "%SystemRoot%\\assembly\\temp"
+      ],
+      "safeLevel": "caution",
+      "description": ".NET 原生镜像缓存，删除后系统自动重建，首次启动相关程序会稍慢。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-debug-wia",
+      "name": "日志文件",
+      "category": "logs",
+      "paths": [
+        "%SystemRoot%\\debug\\WIA"
+      ],
+      "safeLevel": "safe",
+      "description": "Windows 图像采集服务调试日志，可安全清理。来源：WPS清理大师规则。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-update-datastore-logs",
+      "name": "日志文件",
+      "category": "logs",
+      "paths": [
+        "%SystemRoot%\\SoftwareDistribution\\DataStore\\Logs",
+        "%ProgramData%\\USOShared\\Logs"
+      ],
+      "safeLevel": "safe",
+      "description": "Windows 更新数据库日志，可安全清理。来源：WPS清理大师规则。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-network-service-temp",
+      "name": "临时文件",
+      "category": "system_cache",
+      "paths": [
+        "%SystemRoot%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp"
+      ],
+      "safeLevel": "safe",
+      "description": "网络服务临时文件，删除后按需重建。来源：WPS清理大师规则。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "ie-cache-storage",
+      "name": "缓存文件",
+      "category": "system_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Internet Explorer\\CacheStorage"
+      ],
+      "safeLevel": "safe",
+      "description": "Internet Explorer 缓存存储，可安全清理。来源：WPS清理大师规则。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-thumbcache-to-delete",
+      "name": "缩略图缓存",
+      "category": "system_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Windows\\Explorer\\ThumbCacheToDelete"
+      ],
+      "safeLevel": "safe",
+      "description": "系统标记待清理的缩略图缓存，可安全删除。来源：WPS清理大师规则。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "system-profile-webcache",
+      "name": "缓存文件",
+      "category": "system_cache",
+      "paths": [
+        "%SystemRoot%\\System32\\config\\systemprofile\\AppData\\Local\\Microsoft\\Windows\\WebCache",
+        "%SystemRoot%\\Sysnative\\config\\systemprofile\\AppData\\Local\\Microsoft\\Windows\\WebCache"
+      ],
+      "safeLevel": "safe",
+      "description": "系统账户的网页缓存数据库，可安全清理。来源：WPS清理大师规则。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-log-files",
+      "name": "日志文件",
+      "category": "logs",
+      "paths": [
+        "%SystemRoot%\\Logs",
+        "%USERPROFILE%\\ntuser.dat.LOG1",
+        "%USERPROFILE%\\ntuser.dat.LOG2"
+      ],
+      "safeLevel": "caution",
+      "description": "系统日志目录，清理可回收空间，但会减少历史排障信息。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-cbs-logs",
+      "name": "日志文件",
+      "category": "logs",
+      "paths": [
+        "%SystemRoot%\\Logs\\CBS"
+      ],
+      "pattern": "*.log",
+      "safeLevel": "caution",
+      "description": "组件服务日志，删除后会影响历史排障记录。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-panther-logs",
+      "name": "日志文件",
+      "category": "logs",
+      "paths": [
+        "%SystemRoot%\\Panther"
+      ],
+      "pattern": "*.log",
+      "safeLevel": "safe",
+      "description": "Windows 安装日志，通常可清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-minidump",
+      "name": "小型转储文件",
+      "category": "logs",
+      "paths": [
+        "%SystemRoot%\\Minidump"
+      ],
+      "safeLevel": "safe",
+      "description": "系统崩溃时生成的小型内存转储文件，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-security-center",
+      "name": "系统安全中心",
+      "category": "logs",
+      "paths": [
+        "%ProgramData%\\Microsoft\\Windows Defender\\Scans\\History\\Store",
+        "%ProgramData%\\Microsoft\\Windows Defender\\Support",
+        "%ProgramData%\\Microsoft\\Windows\\WER",
+        "%LOCALAPPDATA%\\Microsoft\\Windows Security Health\\Logs"
+      ],
+      "safeLevel": "safe",
+      "description": "Windows Defender 扫描记录与安全中心日志。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-memory-dump",
+      "name": "内存转储文件",
+      "category": "logs",
+      "paths": [
+        "%SystemRoot%\\MEMORY.DMP",
+        "%SystemRoot%\\*.dmp"
+      ],
+      "safeLevel": "caution",
+      "description": "系统崩溃时生成的完整内存转储，可安全删除。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "recycle-bin",
+      "name": "回收站",
+      "category": "recycle_bin",
+      "paths": [
+        "%SystemDrive%\\$Recycle.Bin"
+      ],
+      "safeLevel": "danger",
+      "description": "回收站文件，清理后将无法恢复已删除内容。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "ms-teams-cache",
+      "name": "Microsoft Teams 缓存",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Microsoft\\Teams\\Cache",
+        "%APPDATA%\\Microsoft\\Teams\\Code Cache",
+        "%APPDATA%\\Microsoft\\Teams\\GPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "Teams 网页缓存，删除后会自动重建，不影响会议和消息。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "ms-teams-blob-storage",
+      "name": "Microsoft Teams 媒体缓存",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Microsoft\\Teams\\blob_storage",
+        "%APPDATA%\\Microsoft\\Teams\\databases"
+      ],
+      "safeLevel": "caution",
+      "description": "Teams 媒体和数据库缓存，可能较大，清理后需重新加载历史消息缩略图。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "discord-cache",
+      "name": "Discord 缓存",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\discord\\Cache",
+        "%APPDATA%\\discord\\Code Cache",
+        "%APPDATA%\\discord\\GPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "Discord 客户端缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "slack-cache",
+      "name": "Slack 缓存",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Slack\\Cache",
+        "%APPDATA%\\Slack\\Code Cache",
+        "%APPDATA%\\Slack\\GPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "Slack 客户端缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "spotify-data-cache",
+      "name": "Spotify 音乐缓存",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Spotify\\Data"
+      ],
+      "safeLevel": "safe",
+      "description": "Spotify 离线音乐缓存，可能占用数 GB，清理后播放时会重新缓冲。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "zoom-cache",
+      "name": "Zoom 缓存与日志",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Zoom\\data",
+        "%APPDATA%\\Zoom\\logs"
+      ],
+      "safeLevel": "safe",
+      "description": "Zoom 临时数据和日志文件，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "telegram-media-cache",
+      "name": "Telegram 媒体缓存",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Telegram Desktop\\tdata\\user_data"
+      ],
+      "safeLevel": "caution",
+      "description": "Telegram 接收的媒体文件缓存，清理后聊天记录保留但缩略图需重新加载。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "dingtalk-cache",
+      "name": "钉钉缓存",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\DingTalk\\Cache",
+        "%APPDATA%\\DingTalk\\Code Cache",
+        "%APPDATA%\\DingTalk\\GPUCache"
+      ],
+      "safeLevel": "safe",
+      "description": "钉钉客户端缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "wemeet-cache",
+      "name": "腾讯会议缓存",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Tencent\\WeMeet\\Cache",
+        "%LOCALAPPDATA%\\Tencent\\WeMeet"
+      ],
+      "safeLevel": "safe",
+      "description": "腾讯会议缓存文件，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "feishu-cache",
+      "name": "飞书缓存",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Feishu\\Cache",
+        "%APPDATA%\\Feishu\\Code Cache",
+        "%APPDATA%\\Feishu\\GPUCache",
+        "%APPDATA%\\Lark\\Cache",
+        "%APPDATA%\\Lark\\Code Cache"
+      ],
+      "safeLevel": "safe",
+      "description": "飞书/Lark 客户端缓存，删除后会自动重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "feishu-logs",
+      "name": "飞书 日志文件",
+      "category": "logs",
+      "safeLevel": "safe",
+      "paths": [
+        "%APPDATA%\\Feishu\\Log",
+        "%APPDATA%\\Feishu\\logs",
+        "%LOCALAPPDATA%\\Feishu\\Log"
+      ]
+    },
+    {
+      "id": "bilibili-cache",
+      "name": "哔哩哔哩客户端缓存",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\bilibili\\Cache",
+        "%APPDATA%\\bilibili"
+      ],
+      "safeLevel": "safe",
+      "description": "B站客户端缓存文件，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "baidu-pan-cache",
+      "name": "百度网盘缓存",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\baidu\\BaiduYunGuanjia\\Cache",
+        "%LOCALAPPDATA%\\BaiduNetdisk"
+      ],
+      "safeLevel": "caution",
+      "description": "百度网盘客户端缓存，清理后不影响云端文件。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-inetcache",
+      "name": "缓存文件",
+      "category": "system_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Windows\\INetCache"
+      ],
+      "safeLevel": "safe",
+      "description": "IE 及系统组件共享的网页缓存，Office 等应用也会写入，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-webcache",
+      "name": "缓存文件",
+      "category": "system_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Windows\\WebCache"
+      ],
+      "safeLevel": "caution",
+      "description": "系统浏览历史数据库，清理后会影响历史记录查看，不影响当前浏览。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "ms-office-cache",
+      "name": "Microsoft Office 缓存",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\Office\\16.0\\OfficeFileCache",
+        "%LOCALAPPDATA%\\Microsoft\\Office\\16.0\\Groove\\OfficeCache"
+      ],
+      "safeLevel": "safe",
+      "description": "Office 文档缓存，清理后不影响本地文档，重新打开会重建。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "ms-office-unsaved",
+      "name": "Office 自动恢复临时文件",
+      "category": "temp_files",
+      "paths": [
+        "%APPDATA%\\Microsoft\\Word",
+        "%APPDATA%\\Microsoft\\Excel",
+        "%APPDATA%\\Microsoft\\PowerPoint"
+      ],
+      "pattern": "~$*.tmp",
+      "safeLevel": "caution",
+      "description": "Office 自动恢复文件，确认文档已保存后可清理，否则可能丢失未保存内容。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "adobe-cc-cache",
+      "name": "Adobe Creative Cloud 缓存",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Adobe\\CameraRaw\\Cache",
+        "%LOCALAPPDATA%\\Adobe\\Color\\Cache",
+        "%APPDATA%\\Adobe\\Common\\Media Cache Files"
+      ],
+      "safeLevel": "safe",
+      "description": "Adobe 媒体处理缓存，清理后会在下次使用时重建，不影响项目文件。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-font-cache",
+      "name": "缓存文件",
+      "category": "system_cache",
+      "paths": [
+        "%SystemRoot%\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache"
+      ],
+      "safeLevel": "safe",
+      "description": "Windows 字体缓存的废弃文件，系统已标记为可删除。",
+      "builtin": true,
+      "enabled": true,
+      "pattern": "FontCache-Obsolete-*"
+    },
+    {
+      "id": "windows-installer-patch",
+      "name": "升级补丁备份",
+      "category": "update_residual",
+      "paths": [
+        "%SystemRoot%\\Installer\\$PatchCache$"
+      ],
+      "safeLevel": "caution",
+      "description": "安装程序补丁缓存，可能占用数 GB，清理后修复/卸载部分软件时可能需要重新提供安装介质。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "ea-app-cache",
+      "name": "EA App 缓存",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Electronic Arts\\EA Desktop\\Cache",
+        "%LOCALAPPDATA%\\Electronic Arts\\EA Desktop\\Logs"
+      ],
+      "safeLevel": "safe",
+      "description": "EA 游戏平台客户端缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-microsoft-localapp-cache",
+      "name": "Microsoft 应用 Cache（两级路径）",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Microsoft\\*\\Cache",
+        "%LOCALAPPDATA%\\Microsoft\\*\\Code Cache",
+        "%LOCALAPPDATA%\\Microsoft\\*\\GPUCache"
+      ],
+      "safeLevel": "caution",
+      "description": "覆盖 Microsoft 旗下未单独列出的应用缓存目录（Teams、Edge WebView2 等）。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-microsoft-roaming-cache",
+      "name": "Microsoft 应用 Cache（Roaming 两级）",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Microsoft\\*\\Cache",
+        "%APPDATA%\\Microsoft\\*\\Code Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "覆盖 Roaming 目录下 Microsoft 应用的缓存（Teams blob 等）。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "qq-logs",
+      "name": "QQ 日志文件",
+      "category": "logs",
+      "paths": [
+        "%APPDATA%\\QQ\\Logs",
+        "%APPDATA%\\QQ\\Partitions\\qqnt_*\\Logs",
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\Log",
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\Logs"
+      ],
+      "detectPath": "%APPDATA%\\QQ",
+      "safeLevel": "safe",
+      "description": "QQ 运行日志，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "qq-chat-images",
+      "name": "QQ 聊天图片",
+      "category": "app_cache",
+      "paths": [
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\Image2",
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\Thumb",
+        "%APPDATA%\\QQ\\Partitions\\qqnt_*\\nt_data\\Image"
+      ],
+      "detectPath": "%APPDATA%\\QQ",
+      "safeLevel": "caution",
+      "description": "QQ 聊天中自动接收的图片缓存，可按需清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "qq-nt-cache",
+      "name": "QQ 缓存文件",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\QQ\\Cache\\Cache_Data",
+        "%APPDATA%\\QQ\\Partitions\\qqnt_*\\Cache\\Cache_Data",
+        "%APPDATA%\\QQ\\Partitions\\qqnt_*\\GPUCache",
+        "%APPDATA%\\QQ\\Partitions\\qqnt_*\\Code Cache",
+        "%APPDATA%\\QQ\\Partitions\\qqnt_*\\DawnGraphiteCache",
+        "%APPDATA%\\QQ\\Partitions\\qqnt_*\\DawnWebGPUCache",
+        "%APPDATA%\\QQ\\Partitions\\qq-browser-*\\Cache\\Cache_Data",
+        "%APPDATA%\\QQ\\Partitions\\qq-browser-*\\GPUCache",
+        "%LOCALAPPDATA%\\Tencent\\QQ\\nt_qq",
+        "%LOCALAPPDATA%\\Tencent\\QQNT",
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\Cache",
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\nt_qq\\nt_data\\Emoji",
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\nt_qq\\nt_data\\TempFile"
+      ],
+      "detectPath": "%APPDATA%\\QQ",
+      "safeLevel": "caution",
+      "description": "QQ NT 新版缓存与临时数据，清理后不影响聊天记录。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "qq-chat-videos",
+      "name": "QQ 聊天视频",
+      "category": "app_cache",
+      "safeLevel": "safe",
+      "paths": [
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\Video",
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\VideoCache"
+      ]
+    },
+    {
+      "id": "qq-voice",
+      "name": "QQ 聊天语音",
+      "category": "app_cache",
+      "safeLevel": "safe",
+      "paths": [
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\Ptt"
+      ]
+    },
+    {
+      "id": "qq-received-files",
+      "name": "QQ 接收的文件",
+      "category": "app_cache",
+      "safeLevel": "caution",
+      "paths": [
+        "%USERPROFILE%\\Documents\\Tencent Files\\*\\FileRecv"
+      ]
+    },
+    {
+      "id": "wechat-local-cache",
+      "name": "微信 缓存文件",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Tencent\\WeChat\\Cache",
+        "%APPDATA%\\Tencent\\WeChat\\Code Cache",
+        "%APPDATA%\\Tencent\\WeChat\\GPUCache",
+        "%LOCALAPPDATA%\\Tencent\\WeChat\\XPlugin",
+        "%APPDATA%\\Tencent\\xwechat\\radium\\cache",
+        "%APPDATA%\\Tencent\\xwechat\\radium\\web\\profiles\\*\\GPUCache",
+        "%APPDATA%\\Tencent\\xwechat\\radium\\web\\profiles\\*\\Code Cache"
+      ],
+      "detectPath": "%APPDATA%\\Tencent\\WeChat",
+      "safeLevel": "caution",
+      "description": "微信客户端本地缓存，清理后不影响聊天记录。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "wechat-xwechat-log",
+      "name": "微信 日志文件",
+      "category": "logs",
+      "paths": [
+        "%APPDATA%\\Tencent\\xwechat\\log",
+        "%APPDATA%\\Tencent\\xwechat\\radium\\log",
+        "%APPDATA%\\Tencent\\xwechat\\crashinfo",
+        "%APPDATA%\\Tencent\\xwechat\\confsdk\\log"
+      ],
+      "detectPath": "%APPDATA%\\Tencent\\xwechat",
+      "safeLevel": "safe",
+      "description": "微信新版（xwechat）运行日志，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "wechat-chat-videos",
+      "name": "微信 聊天视频",
+      "category": "app_cache",
+      "safeLevel": "safe",
+      "paths": [
+        "%USERPROFILE%\\Documents\\WeChat Files\\*\\FileStorage\\Video"
+      ]
+    },
+    {
+      "id": "wechat-received-files",
+      "name": "微信 接收的文件",
+      "category": "app_cache",
+      "safeLevel": "caution",
+      "paths": [
+        "%USERPROFILE%\\Documents\\WeChat Files\\*\\FileStorage\\File"
+      ]
+    },
+    {
+      "id": "wechat-backup",
+      "name": "微信 微信备份",
+      "category": "app_cache",
+      "safeLevel": "caution",
+      "paths": [
+        "%USERPROFILE%\\Documents\\WeChat Files\\Backup"
+      ]
+    },
+    {
+      "id": "netease-cloudmusic-cache",
+      "name": "网易云音乐",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\NetEase\\CloudMusic\\webdata\\file",
+        "%APPDATA%\\NetEase\\CloudMusic\\Cache",
+        "%APPDATA%\\NetEase\\CloudMusic\\Code Cache",
+        "%APPDATA%\\NetEase\\CloudMusic\\GPUCache",
+        "%USERPROFILE%\\Music\\CloudMusic\\Cache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\NetEase\\CloudMusic",
+      "safeLevel": "safe",
+      "description": "网易云音乐客户端缓存，清理后重新播放时会重新缓冲。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "qqmusic-cache",
+      "name": "QQ音乐",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Tencent\\QQMusicCache",
+        "%APPDATA%\\Tencent\\QQMusic\\Data\\cache",
+        "%APPDATA%\\Tencent\\QQMusic\\Cache",
+        "%APPDATA%\\Tencent\\QQMusic\\Code Cache",
+        "%APPDATA%\\Tencent\\QQMusic\\GPUCache"
+      ],
+      "detectPath": "%APPDATA%\\Tencent\\QQMusic",
+      "safeLevel": "safe",
+      "description": "QQ音乐客户端缓存，清理后播放时会重新缓冲。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "tencent-video-cache",
+      "name": "腾讯视频",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Tencent\\QQLive\\Cache",
+        "%APPDATA%\\Tencent\\QQLive\\Cache",
+        "%APPDATA%\\Tencent\\QQLive\\Code Cache",
+        "%LOCALAPPDATA%\\Tencent\\TencentVideo",
+        "%APPDATA%\\Tencent\\TencentVideo\\Cache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\Tencent\\QQLive",
+      "safeLevel": "safe",
+      "description": "腾讯视频客户端缓存，清理后不影响已下载的视频正片。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "iqiyi-cache",
+      "name": "爱奇艺",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\iQIYI\\Cache",
+        "%APPDATA%\\iQiYi\\Cache",
+        "%APPDATA%\\iQIYI\\Code Cache",
+        "%APPDATA%\\iQIYI\\GPUCache",
+        "%APPDATA%\\IQIYI Video\\LStyle",
+        "%APPDATA%\\iQiYi Video\\LStyle"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\iQIYI",
+      "safeLevel": "safe",
+      "description": "爱奇艺客户端缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "youku-cache",
+      "name": "优酷",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Youku\\YoukuClient\\Cache",
+        "%APPDATA%\\Youku\\Cache",
+        "%APPDATA%\\Youku\\Code Cache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\Youku",
+      "safeLevel": "safe",
+      "description": "优酷客户端缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "thunder-cache",
+      "name": "迅雷",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Thunder Network\\Thunder\\Profiles\\Default\\Cache",
+        "%APPDATA%\\Thunder Network\\Thunder\\Profiles\\Default\\Code Cache",
+        "%APPDATA%\\Thunder Network\\Thunder\\Profiles\\Default\\GPUCache",
+        "%APPDATA%\\Thunder Network\\Thunder\\Profiles\\default\\Cache",
+        "%LOCALAPPDATA%\\Thunder Network\\Thunder\\Cache",
+        "%LOCALAPPDATA%\\Thunder Network\\Thunder\\GrowPlugin\\Cache",
+        "%LOCALAPPDATA%\\Xunlei Network\\Thunder\\Cache"
+      ],
+      "detectPath": "%APPDATA%\\Thunder Network",
+      "safeLevel": "safe",
+      "description": "迅雷浏览器组件缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "thunder-download-temp",
+      "name": "迅雷下载临时",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Thunder Network\\Thunder\\Profiles\\Default\\download_temp",
+        "%APPDATA%\\Thunder Network\\Thunder\\Download\\Temp",
+        "%LOCALAPPDATA%\\Thunder Network\\Thunder\\Download\\Temp",
+        "%APPDATA%\\Thunder Network\\Thunder\\Logs"
+      ],
+      "detectPath": "%APPDATA%\\Thunder Network",
+      "safeLevel": "caution",
+      "description": "迅雷下载临时文件和日志。下载中的任务会被中断，请确认后清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "wps-cache",
+      "name": "WPS Office",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Kingsoft\\WPS Office\\*\\cache",
+        "%APPDATA%\\Kingsoft\\Office6\\cache",
+        "%LOCALAPPDATA%\\Kingsoft\\WPS Cloud Files\\*\\cache",
+        "%APPDATA%\\Kingsoft\\WPS Cloud Files\\Cache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\Kingsoft\\WPS Office",
+      "safeLevel": "safe",
+      "description": "WPS Office 文档缓存，清理后不影响本地文档。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "qqbrowser-cache",
+      "name": "QQ浏览器",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Tencent\\QQBrowser\\User Data\\Default\\Cache",
+        "%LOCALAPPDATA%\\Tencent\\QQBrowser\\User Data\\Default\\Code Cache",
+        "%LOCALAPPDATA%\\Tencent\\QQBrowser\\User Data\\Default\\GPUCache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\Tencent\\QQBrowser",
+      "safeLevel": "safe",
+      "description": "QQ 浏览器缓存，可安全清理，重新访问网站会重新加载。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "quark-cache",
+      "name": "夸克浏览器",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\Quark\\User Data\\*\\Cache",
+        "%LOCALAPPDATA%\\Quark\\User Data\\*\\Code Cache",
+        "%LOCALAPPDATA%\\Quark\\User Data\\*\\GPUCache",
+        "%LOCALAPPDATA%\\Quark\\User Data\\ShaderCache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\Quark",
+      "safeLevel": "safe",
+      "description": "夸克浏览器缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "360browser-cache",
+      "name": "360安全浏览器",
+      "category": "browser",
+      "paths": [
+        "%LOCALAPPDATA%\\360chrome\\Chrome\\User Data\\Default\\Cache",
+        "%LOCALAPPDATA%\\360chrome\\Chrome\\User Data\\Default\\Code Cache",
+        "%APPDATA%\\360se6\\User Data\\Default\\Cache",
+        "%APPDATA%\\360se6\\User Data\\Default\\Code Cache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\360chrome",
+      "safeLevel": "safe",
+      "description": "360 浏览器缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "wegame-cache",
+      "name": "WeGame",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\WeGame\\Cache",
+        "%APPDATA%\\Tencent\\WeGame\\Cache",
+        "%APPDATA%\\Tencent\\WeGame\\Code Cache",
+        "%APPDATA%\\Tencent\\WeGame\\GPUCache"
+      ],
+      "detectPath": "%APPDATA%\\Tencent\\WeGame",
+      "safeLevel": "safe",
+      "description": "WeGame 游戏平台缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "sogou-ime-cache",
+      "name": "搜狗输入法",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\SogouPY\\CellsCache",
+        "%LOCALAPPDATA%\\Sogou\\SogouPY\\CellsCache",
+        "%APPDATA%\\SogouPY\\Cache"
+      ],
+      "detectPath": "%APPDATA%\\SogouPY",
+      "safeLevel": "safe",
+      "description": "搜狗输入法词库与界面缓存，清理后会重新加载。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "baidu-ime-cache",
+      "name": "百度输入法",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Baidu\\BaiduPinyin\\Cache",
+        "%APPDATA%\\Baidu\\BaiduPinyin\\Cache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\Baidu\\BaiduPinyin",
+      "safeLevel": "safe",
+      "description": "百度输入法缓存，清理后会重新加载。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "huya-cache",
+      "name": "虎牙直播",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Huya\\Cache",
+        "%APPDATA%\\Huya\\Code Cache",
+        "%APPDATA%\\Huya\\GPUCache"
+      ],
+      "detectPath": "%APPDATA%\\Huya",
+      "safeLevel": "safe",
+      "description": "虎牙直播客户端缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "douyu-cache",
+      "name": "斗鱼直播",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Douyu\\Cache",
+        "%APPDATA%\\Douyu\\Code Cache",
+        "%APPDATA%\\Douyu\\GPUCache"
+      ],
+      "detectPath": "%APPDATA%\\Douyu",
+      "safeLevel": "safe",
+      "description": "斗鱼直播客户端缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "youdao-dict-cache",
+      "name": "有道词典",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\Youdao\\dict\\Cache",
+        "%APPDATA%\\Youdao\\dict\\Code Cache"
+      ],
+      "detectPath": "%APPDATA%\\Youdao\\dict",
+      "safeLevel": "safe",
+      "description": "有道词典客户端缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "netease-uu-cache",
+      "name": "网易UU加速器",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\NeteaseUU\\Cache",
+        "%APPDATA%\\NeteaseUU\\Code Cache",
+        "%LOCALAPPDATA%\\NeteaseUU\\Cache"
+      ],
+      "detectPath": "%APPDATA%\\NeteaseUU",
+      "safeLevel": "safe",
+      "description": "网易UU加速器客户端缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "tencent-logs",
+      "name": "腾讯应用日志",
+      "category": "logs",
+      "paths": [
+        "%APPDATA%\\Tencent\\Logs",
+        "%APPDATA%\\Tencent\\QQTempSys",
+        "%TEMP%\\Tencent\\buglyLog",
+        "%TEMP%\\Tencent\\WeMeet\\Temp"
+      ],
+      "safeLevel": "safe",
+      "description": "腾讯应用运行日志和崩溃报告，删除不影响正常使用。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "baiduyun-kernel-logs",
+      "name": "百度网盘内核日志",
+      "category": "logs",
+      "paths": [
+        "%APPDATA%\\BaiduYunKernel\\Data\\*.log"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\BaiduNetdisk",
+      "safeLevel": "safe",
+      "description": "百度网盘后台内核运行日志。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-tencent-cache",
+      "name": "腾讯系应用",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\Tencent\\*\\Cache",
+        "%APPDATA%\\Tencent\\*\\Cache",
+        "%LOCALAPPDATA%\\Tencent\\*\\Code Cache",
+        "%APPDATA%\\Tencent\\*\\Code Cache",
+        "%LOCALAPPDATA%\\Tencent\\*\\GPUCache",
+        "%APPDATA%\\Tencent\\*\\GPUCache"
+      ],
+      "safeLevel": "caution",
+      "description": "自动覆盖腾讯旗下未单独列出应用的缓存目录。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-netease-cache",
+      "name": "网易系应用",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\NetEase\\*\\Cache",
+        "%APPDATA%\\NetEase\\*\\Cache",
+        "%LOCALAPPDATA%\\Netease\\*\\Cache",
+        "%APPDATA%\\Netease\\*\\Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "自动覆盖网易旗下未单独列出应用的缓存目录。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-localappdata-cache",
+      "name": "应用缓存（AppData Local）",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\*\\Cache",
+        "%LOCALAPPDATA%\\*\\Caches",
+        "%LOCALAPPDATA%\\*\\Code Cache",
+        "%LOCALAPPDATA%\\*\\GPUCache",
+        "%LOCALAPPDATA%\\*\\GPU Cache",
+        "%LOCALAPPDATA%\\*\\Shader Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "自动扫描 AppData\\Local 下所有应用的标准缓存目录，软件名从路径自动识别。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-roaming-cache",
+      "name": "应用缓存（AppData Roaming）",
+      "category": "app_cache",
+      "paths": [
+        "%APPDATA%\\*\\Cache",
+        "%APPDATA%\\*\\Caches",
+        "%APPDATA%\\*\\Code Cache",
+        "%APPDATA%\\*\\GPUCache",
+        "%APPDATA%\\*\\GPU Cache"
+      ],
+      "safeLevel": "caution",
+      "description": "自动扫描 AppData\\Roaming 下所有应用的标准缓存目录，软件名从路径自动识别。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-localappdata-logs",
+      "name": "应用日志（AppData Local）",
+      "category": "logs",
+      "paths": [
+        "%LOCALAPPDATA%\\*\\logs",
+        "%LOCALAPPDATA%\\*\\Logs",
+        "%APPDATA%\\*\\logs",
+        "%APPDATA%\\*\\Logs"
+      ],
+      "safeLevel": "safe",
+      "description": "自动扫描 AppData 下所有应用的日志目录，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "nvidia-installer-cache",
+      "name": "NVIDIA 驱动安装包缓存",
+      "category": "update_residual",
+      "paths": [
+        "%SystemDrive%\\NVIDIA\\DisplayDriver",
+        "%SystemDrive%\\NVIDIA\\FrameView",
+        "%ProgramData%\\NVIDIA Corporation\\Downloader",
+        "%LOCALAPPDATA%\\NVIDIA Corporation\\Installer2"
+      ],
+      "detectPath": "%ProgramFiles%\\NVIDIA Corporation",
+      "safeLevel": "safe",
+      "description": "NVIDIA 驱动安装包缓存，安装完成后可安全清理，不影响已安装的驱动。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "amd-installer-cache",
+      "name": "AMD 驱动安装包缓存",
+      "category": "update_residual",
+      "paths": [
+        "%SystemDrive%\\AMD\\Support",
+        "%SystemDrive%\\ATI"
+      ],
+      "detectPath": "%ProgramFiles%\\AMD",
+      "safeLevel": "safe",
+      "description": "AMD 驱动安装包，安装完成后可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "intel-installer-cache",
+      "name": "Intel 驱动安装包缓存",
+      "category": "update_residual",
+      "paths": [
+        "%SystemDrive%\\Intel\\Logs",
+        "%ProgramData%\\Intel\\installer"
+      ],
+      "detectPath": "%ProgramFiles%\\Intel",
+      "safeLevel": "safe",
+      "description": "Intel 驱动安装包缓存，可安全清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "windows-update-download",
+      "name": "系统更新缓存",
+      "category": "update_residual",
+      "paths": [
+        "%SystemRoot%\\SoftwareDistribution\\Download"
+      ],
+      "safeLevel": "caution",
+      "description": "Windows Update 待安装或已安装的更新包，清理后已安装更新不受影响，若有更新正在进行请勿清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "software-temp-installers",
+      "name": "软件临时安装包",
+      "category": "temp_files",
+      "paths": [
+        "%TEMP%\\*.exe",
+        "%TEMP%\\*.msi",
+        "%LOCALAPPDATA%\\Temp\\*.exe",
+        "%LOCALAPPDATA%\\Temp\\*.msi"
+      ],
+      "safeLevel": "caution",
+      "description": "临时目录中的安装包文件，确认软件已安装完毕后可清理。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "jianyingpro-cache",
+      "name": "剪映",
+      "category": "app_cache",
+      "paths": [
+        "%LOCALAPPDATA%\\JianyingPro\\User Data\\Cache",
+        "%LOCALAPPDATA%\\JianyingPro\\User Data\\Code Cache",
+        "%LOCALAPPDATA%\\JianyingPro\\User Data\\GPUCache",
+        "%LOCALAPPDATA%\\JianyingPro\\User Data\\log",
+        "%LOCALAPPDATA%\\JianyingPro\\User Data\\Log",
+        "%LOCALAPPDATA%\\JianyingPro\\User Data\\CEF",
+        "%LOCALAPPDATA%\\JianyingPro\\User Data\\Tracking",
+        "%LOCALAPPDATA%\\JianyingPro\\User Data\\TTNet",
+        "%LOCALAPPDATA%\\JianyingPro\\User Data\\bach_private_cache"
+      ],
+      "detectPath": "%LOCALAPPDATA%\\JianyingPro",
+      "safeLevel": "safe",
+      "description": "剪映客户端缓存与日志，可安全清理，不影响项目文件。来源：WPS清理大师规则。",
+      "builtin": true,
+      "enabled": true
+    },
+    {
+      "id": "generic-localappdata-temp",
+      "name": "应用临时文件（AppData Local）",
+      "category": "temp_files",
+      "paths": [
+        "%LOCALAPPDATA%\\*\\Temp",
+        "%LOCALAPPDATA%\\*\\temp",
+        "%APPDATA%\\*\\Temp",
+        "%APPDATA%\\*\\temp"
+      ],
+      "safeLevel": "caution",
+      "description": "自动扫描 AppData 下所有应用的临时文件目录。",
+      "builtin": true,
+      "enabled": true
+    }
+  ]
+}

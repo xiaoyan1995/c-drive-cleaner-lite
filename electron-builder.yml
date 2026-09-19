@@ -1,0 +1,49 @@
+appId: com.cdrive.cleaner
+productName: C-Drive Cleaner
+directories:
+  output: release
+  buildResources: build
+artifactName: C-Drive-Cleaner-Setup-${version}.${ext}
+afterPack: scripts/apply-fuses.cjs
+publish: null
+files:
+  - out/**/*
+  - package.json
+  - rules/**/*
+  - "!node_modules/better-sqlite3/src/**"
+  - "!node_modules/better-sqlite3/deps/**"
+  - "!node_modules/better-sqlite3/build/deps/**"
+  - "!node_modules/better-sqlite3/build/Release/obj/**"
+  - "!node_modules/better-sqlite3/build/**/*.tlog"
+  - "!node_modules/better-sqlite3/build/**/*.recipe"
+  - "!node_modules/better-sqlite3/build/**/*.vcxproj"
+  - "!node_modules/better-sqlite3/build/**/*.filters"
+  - "!node_modules/better-sqlite3/build/**/*.lib"
+  - "!node_modules/better-sqlite3/build/**/*.exp"
+  - "!node_modules/better-sqlite3/build/**/*.iobj"
+  - "!node_modules/better-sqlite3/build/**/*.ipdb"
+  - "!node_modules/better-sqlite3/build/Release/test_extension.node"
+extraResources:
+  - from: native/mft-reader/bin/Release/net9.0/win-x64/publish
+    to: native/mft-reader
+    filter:
+      - "**/*"
+      - "!**/*.pdb"
+      - "!**/*.ipdb"
+      - "!**/*.iobj"
+  - from: build/tray-icon.png
+    to: tray-icon.png
+win:
+  icon: C:/Temp/cdrive-icon.ico
+  requestedExecutionLevel: requireAdministrator
+  target:
+    - nsis
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  installerIcon: C:/Temp/cdrive-icon.ico
+  uninstallerIcon: C:/Temp/cdrive-icon.ico
+cdrive-icon.ico
+  uninstallerIcon: C:/Temp/cdrive-icon.ico

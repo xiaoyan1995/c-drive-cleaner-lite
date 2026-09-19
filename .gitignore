@@ -1,0 +1,25 @@
+node_modules/
+dist/
+out/
+release/
+*.log
+*.local
+.env
+.env.*
+coverage/
+*.tsbuildinfo
+electron.vite.config.*.mjs
+dev-server.log
+scripts/.winapp2-cache.ini
+docs/*
+!docs/screenshots/
+artifacts/
+
+# .NET build outputs (MFT reader engine)
+native/**/bin/
+native/**/obj/
+
+# Local previews / scratch
+preview/
+tmp/
+

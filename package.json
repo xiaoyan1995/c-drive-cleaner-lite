@@ -1,0 +1,50 @@
+{
+  "name": "c-drive-cleaner-lite",
+  "version": "1.0.0",
+  "description": "Windows system-drive space management: disk scanning (MFT engine), junk cleanup, junction migration, duplicate finder, and daily monitoring.",
+  "main": "./out/main/index.js",
+  "author": "C-Drive Cleaner Lite",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node scripts/run-electron-vite.cjs dev",
+    "native:mft:build": "dotnet build native/mft-reader/CDriveCleaner.MftReader.csproj",
+    "native:mft:publish": "dotnet publish native/mft-reader/CDriveCleaner.MftReader.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false",
+    "typecheck": "tsc --noEmit",
+    "clean:build": "node scripts/clean-build.cjs",
+    "build:app": "npm run clean:build && npm run typecheck && node scripts/run-electron-vite.cjs build",
+    "build": "npm run native:mft:publish && npm run build:app && electron-builder",
+    "build:harden": "npm run native:mft:publish && npm run build:app && node scripts/harden-build.cjs && electron-builder",
+    "dist": "npm run build",
+    "verify:ui-contract": "node scripts/verify-ui-contract.cjs",
+    "rules:update-community": "node scripts/convert-winapp2.mjs",
+    "icons:collect": "python scripts/collect_app_icons.py"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "bytenode": "^1.5.7"
+  },
+  "devDependencies": {
+    "@electron/fuses": "^2.1.1",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.10.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "bytenode": "^1.5.7",
+    "electron": "^33.3.1",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "javascript-obfuscator": "^5.4.2",
+    "lucide-react": "^0.468.0",
+    "postcss": "^8.4.49",
+    "rcedit": "^5.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.15.4",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "zustand": "^4.5.7"
+  }
+}
